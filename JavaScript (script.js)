@@ -1,0 +1,109 @@
+// ==========================
+// Données des questions
+// ==========================
+const questions = [
+  { question: "Quelle couleur préfères-tu ?", answers: ["Rouge", "Bleu", "Noir", "Rose"] },
+  { question: "Ton plat préféré ?", answers: ["Pizza", "Burger", "Fritay", "Sushi"] },
+  { question: "Quel genre de musique écoutes-tu ?", answers: ["Rap", "Kompa", "Afrobeat", "Pop"] },
+  { question: "Tu préfères...", answers: ["Jour", "Nuit", "Matin", "Soirée"] },
+  { question: "Ton mood d’amour ?", answers: ["Romantique", "Timide", "Fougueux", "Indépendant"] },
+];
+
+let currentQuestion = 0;
+let playerName = localStorage.getItem("playerName") || "";
+let score = 0;
+
+// ==========================
+// Page d'accueil
+// ==========================
+if (document.getElementById("startBtn")) {
+  document.getElementById("startBtn").addEventListener("click", () => {
+    const name = document.getElementById("playerName").value.trim();
+    if (name === "") {
+      alert("Entre ton prénom ou pseudo !");
+      return;
+    }
+    localStorage.setItem("playerName", name);
+    window.location.href = "questions.html";
+  });
+}
+
+// ==========================
+// Page questions
+// ==========================
+if (document.getElementById("questionContainer")) {
+  const questionTitle = document.getElementById("questionTitle");
+  const answersDiv = document.getElementById("answers");
+  const progress = document.getElementById("progress");
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    questionTitle.textContent = q.question;
+    answersDiv.innerHTML = "";
+    q.answers.forEach((ans) => {
+      const btn = document.createElement("button");
+      btn.textContent = ans;
+      btn.addEventListener("click", nextQuestion);
+      answersDiv.appendChild(btn);
+    });
+    progress.textContent = `Question ${currentQuestion + 1} / ${questions.length}`;
+  }
+
+  function nextQuestion() {
+    score += 1; // simulation (tu peux remplacer par logique réelle)
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      localStorage.setItem("score", score);
+      window.location.href = "resultat.html";
+    }
+  }
+
+  showQuestion();
+}
+
+// ==========================
+// Page résultat
+// ==========================
+if (document.getElementById("resultText")) {
+  const name = localStorage.getItem("playerName");
+  const score = localStorage.getItem("score");
+  document.getElementById("resultText").textContent = `🎉 Félicitations ${name} ! Tu as obtenu ${score}/${questions.length} points.`;
+
+  document.getElementById("shareBtn").addEventListener("click", () => {
+    const uid = Math.random().toString(36).substring(2, 8);
+    const link = `${window.location.origin}/index.html?uid=${uid}&host=${encodeURIComponent(name)}`;
+    navigator.clipboard.writeText(link);
+    alert("Lien copié ! Partage-le avec tes amis 💞");
+  });
+
+  document.getElementById("leaderboardBtn").addEventListener("click", () => {
+    window.location.href = "classement.html";
+  });
+
+  document.getElementById("createBtn").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
+
+// ==========================
+// Page classement
+// ==========================
+if (document.getElementById("leaderboardList")) {
+  const list = document.getElementById("leaderboardList");
+  const storedScore = localStorage.getItem("score");
+  const storedName = localStorage.getItem("playerName");
+
+  const playerData = [{ name: storedName, score: storedScore }];
+  list.innerHTML = "";
+  playerData.forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `${p.name} — ${p.score} pts`;
+    list.appendChild(li);
+  });
+
+  document.getElementById("backHome").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+}
