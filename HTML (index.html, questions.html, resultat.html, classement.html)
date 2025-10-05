@@ -1,0 +1,81 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Challenge Crush 💞</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container home">
+    <h1>🎮 Challenge Crush</h1>
+    <p>Crée ton défi et découvre qui te connaît vraiment 💘</p>
+
+    <input type="text" id="playerName" placeholder="Entre ton prénom ou pseudo..." />
+    <button id="startBtn">Commencer</button>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+<!-- questions.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Challenge Crush 💞 - Questions</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container" id="questionContainer">
+    <h2 id="questionTitle"></h2>
+    <div id="answers"></div>
+    <p id="progress"></p>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+<!-- resultat.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Résultat 💘</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container result">
+    <h2 id="resultText"></h2>
+    <button id="shareBtn">📤 Partager mon défi</button>
+    <button id="leaderboardBtn">Voir le classement</button>
+    <button id="createBtn">Créer mon propre défi</button>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+<!-- classement.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classement 🏆</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container leaderboard">
+    <h2>🏆 Classement du Défi</h2>
+    <ul id="leaderboardList"></ul>
+    <button id="backHome">Retour à l'accueil</button>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
